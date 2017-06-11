@@ -36,12 +36,10 @@ const ArticleSchema = new Schema({
   },
   headline: {
     type: Object,
-    required: true,
     default: {},
   },
   keywords: {
     type: Array,
-    required: true,
     default: [],
   },
   pub_date: {
@@ -60,7 +58,6 @@ const ArticleSchema = new Schema({
   },
   byline: {
     type: Object,
-    required: true,
     default: {},
   },
   type_of_material: {

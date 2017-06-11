@@ -1,8 +1,14 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
-import './index.css';
+import React, { Component } from 'react';
+import ReactDom from 'react-dom';
+import { Provider } from 'react-redux';
+import { browserHistory, Router } from 'react-router';
+import routes from './routes.js';
+import configureStore from './configureStore';
 
-ReactDOM.render(<App />, document.getElementById('root'));
-registerServiceWorker();
+const store = configureStore();
+
+ReactDom.render((
+  <Provider store={store}>
+    <Router history={browserHistory} routes={routes} />
+  </Provider>
+), document.getElementById('root'));

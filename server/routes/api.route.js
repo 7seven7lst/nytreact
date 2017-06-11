@@ -4,8 +4,9 @@ const controller = require('../controllers/api.controller.js');
 const router = new express.Router();
 
 router
-.get('/fetcharticles', controller.fetchArticles)
+.post('/fetcharticles', controller.fetchArticles)
 .post('/favarticles', controller.postFavArticle)
+.get('/favarticles', controller.getFavArticles)
 .get('/favarticle/:id', controller.getFavArticle)
 .delete('/favarticle/:id', controller.deleteFavArticle)
 

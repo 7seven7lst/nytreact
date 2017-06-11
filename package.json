@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "node index.js",
+    "client": "babel-node start-client.js"
   },
   "repository": {
     "type": "git",
@@ -29,5 +31,8 @@
   },
   "engines": {
     "node": "8.0.0"
+  },
+  "devDependencies": {
+    "concurrently": "^3.4.0"
   }
 }
