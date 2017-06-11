@@ -48,9 +48,11 @@ async function getFavArticles (req, res) {
 }
 
 async function getFavArticle (req, res) {
+  console.log("here >>>", req.params.id)
   let id = req.params.id;
   try {
     let article = await Article.findOne({_id: id});
+    res.status(200).json(article);
   } catch(err) {
     console.log(`error getting article ${id}`);
     res.status(404).json(`error getting article ${id}`).end();
@@ -61,6 +63,7 @@ async function deleteFavArticle (req, res) {
   let id = req.params.id;
   try {
     await Article.find({_id: id}).remove();
+    res.status(200).json(`article ${id} successfully removed`).end();
   } catch(err) {
     console.log(`error deleting article ${id}`);
     res.status(404).json(`error deleting article ${id}`).end();

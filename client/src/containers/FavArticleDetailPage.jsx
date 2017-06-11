@@ -1,10 +1,10 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
-import FavArticlesList from '../components/FavArticlesList.jsx';
+import ArticleDetail from '../components/ArticleDetail.jsx';
 import * as actions from '../actions';
 
-class FavArticlesPage extends React.Component {
+class FavArticleDetailPage extends React.Component {
 
   /**
    * Class constructor.
@@ -14,8 +14,9 @@ class FavArticlesPage extends React.Component {
   }
 
   fetchData() {
-    const { fetchFavArticles} = this.props;
-    fetchFavArticles();
+    const { fetchArticleDetail, location} = this.props;
+    console.log(location.query.article_id, fetchArticleDetail);
+    fetchArticleDetail(location.query.article_id);
   }
   /**
    * This method will be executed after initial rendering.
@@ -29,30 +30,28 @@ class FavArticlesPage extends React.Component {
    */
   render() {
     return (
-      <div>
-        <FavArticlesList articles={this.props.favedArticles} />
-      </div>
+      <ArticleDetail article={this.props.article} />
     );
   }
 }
 
 const mapStateToProps = (state) => {
   return {
-    favedArticles: state.favedArticles
+    article: state.currentArticleDetail
   };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    fetchFavArticles: () => {
-      dispatch(actions.getAllFavArticles());
+    fetchArticleDetail: (article_id) => {
+      dispatch(actions.getArticleDetail(article_id));
     }
   }
 }
 
-FavArticlesPage = withRouter(connect(
+FavArticleDetailPage = withRouter(connect(
   mapStateToProps,
   mapDispatchToProps
-)(FavArticlesPage));
+)(FavArticleDetailPage));
 
-export default FavArticlesPage;
+export default FavArticleDetailPage;

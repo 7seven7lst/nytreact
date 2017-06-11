@@ -36,9 +36,26 @@ export async function getFavArticles() {
         'Content-Type': 'application/json', 
       }
     })
-    .then(response=>response.json())
+    .then(response => response.json())
     return response;
   } catch(err) {
     throw new Error(`Unable to get all favorite articles, ${err}`)
+  }
+}
+
+export async function getArticleDetail(article_id) {
+  try {
+    let response = await fetch(`/api/favarticle/${article_id}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json', 
+      }
+    })
+    .then(response => response.json())
+    console.log("response in api is >>>", response);
+    return response;
+  } catch(err) {
+    console.log("error is api is >>>", err);
+    throw new Error(`Unable to get favorite article ${article_id}, ${err}`)
   }
 }

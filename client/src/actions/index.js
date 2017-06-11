@@ -7,7 +7,6 @@ export const updateQuery = (name, value) => (dispatch, getState) =>
     value,
   });
 
-
 export const fetchNewArticles = () => {
   return async (dispatch, getState) => {
     const { query } = getState();
@@ -55,6 +54,26 @@ export const getAllFavArticles = () => {
     } catch (error) {
       dispatch({
         type: 'FETCH_FAVORITE_ARTICLES_FAILURE',
+        message: error.message || 'Something went wrong.',
+      });
+    }
+  }
+}
+
+export const getArticleDetail = (article_id) => {
+  console.log("here in action>>>")
+  return async (dispatch, getState) => {
+    try {
+      let response = await api.getArticleDetail(article_id);
+      console.log("response is >>>>", response);
+      dispatch({
+        type: 'FETCH_ARTICLE_DETAIL_SUCCESS',
+        result: response
+      });
+    } catch (error) {
+      console.log('error is >>>', error);
+      dispatch({
+        type: 'FETCH_ARTICLE_DETAIL_FAILURE',
         message: error.message || 'Something went wrong.',
       });
     }
