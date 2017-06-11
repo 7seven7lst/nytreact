@@ -17,6 +17,17 @@
   },
   "homepage": "https://github.com/7seven7lst/nytreact#readme",
   "dependencies": {
-    "dotenv": "^4.0.0"
+    "axios": "^0.16.2",
+    "body-parser": "^1.17.2",
+    "dotenv": "^4.0.0",
+    "express": "^4.15.3",
+    "lodash": "^4.17.4",
+    "moment": "^2.18.1",
+    "mongoose": "^4.10.5",
+    "mongoose-type-url": "^1.0.2",
+    "morgan": "^1.8.2"
+  },
+  "engines": {
+    "node": "8.0.0"
   }
 }

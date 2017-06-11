@@ -1,0 +1,31 @@
+const express = require('express');
+const bodyParser = require("body-parser");
+const logger = require('morgan');
+const mongoose = require('mongoose');
+require('dotenv').config();
+mongoose.Promise = Promise;
+
+const app = express();
+// Log activity
+app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.text());
+app.use(bodyParser.json({ type: "application/vnd.api+json" }));
+app.set('port', (process.env.PORT || 3001));
+
+// Express only serves static assets in production
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('client/build'));
+}
+
+// Database configuration with mongoose
+mongoose.connect(process.env.MONGODB_URL);
+var db = mongoose.connection;
+
+const apiRoutes = require('./server/routes/api.route');
+app.use('/api', apiRoutes);
+
+app.listen(app.get('port'), () => {
+  console.log(`Find the server at: http://localhost:${app.get('port')}/`); // eslint-disable-line no-console
+});
