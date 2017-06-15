@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import Link from 'react-toolbox/lib/link/Link';
+import { Link, IndexLink } from 'react-router';
 import AppBar from 'react-toolbox/lib/app_bar/AppBar';
 import Navigation from 'react-toolbox/lib/navigation/Navigation';
 import FontIcon from 'react-toolbox/lib/font_icon';
@@ -14,9 +14,9 @@ const Base = ({ children }) => (
   <div>
     <AppBar title="NYT React" rightIcon={<GithubIcon />}>
       <Navigation type="horizontal">
-        <Link href="/" label="Dashboard"  style={{color: 'white'}}/> 
-        <Link href="/new_articles" label="Fetch New Articles" style={{color: 'white'}}/>
-        <Link href="/fav_articles" label="Faved Articles" style={{color: 'white'}}/>
+        <IndexLink to="/" style={{color: 'white', margin:'5px'}}>Dashboard</IndexLink> 
+        <Link to="/new_articles" style={{color: 'white',margin:'5px'}}>Fetch New Articles</Link>
+        <Link to="/fav_articles" style={{color: 'white', margin:'5px'}}>Favorite Ariticles</Link>
       </Navigation>
     </AppBar>
 
