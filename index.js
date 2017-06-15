@@ -19,6 +19,7 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
 }
 
+
 // Database configuration with mongoose
 mongoose.connect(process.env.MONGODB_URL);
 var db = mongoose.connection;
