@@ -26,6 +26,31 @@ var db = mongoose.connection;
 const apiRoutes = require('./server/routes/api.route');
 app.use('/api', apiRoutes);
 
-app.listen(app.get('port'), () => {
+
+
+const server = app.listen(app.get('port'), () => {
   console.log(`Find the server at: http://localhost:${app.get('port')}/`); // eslint-disable-line no-console
 });
+
+const io = require('socket.io')(server);
+
+io.on('connection', (socket) => { 
+  console.log('a user connected');
+
+  socket.on('disconnect', () => {
+    console.log('user disconnected');
+  });
+
+  socket.on('subscribe', function(room) { 
+    console.log('joining room', room);
+    socket.join(room); 
+  })
+
+  socket.on('unsubscribe', function(room) {  
+    console.log('leaving room', room);
+    socket.leave(room); 
+  })
+
+})
+
+global.io = io;

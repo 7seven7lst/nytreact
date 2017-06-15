@@ -27,7 +27,8 @@
     "moment": "^2.18.1",
     "mongoose": "^4.10.5",
     "mongoose-type-url": "^1.0.2",
-    "morgan": "^1.8.2"
+    "morgan": "^1.8.2",
+    "socket.io": "^2.0.3"
   },
   "engines": {
     "node": "8.0.0"

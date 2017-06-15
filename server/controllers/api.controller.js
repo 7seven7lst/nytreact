@@ -4,7 +4,9 @@ const _ = require('lodash');
 const Article = require('../models/Article.model');
 
 async function fetchArticles (req, res){
-  const {topic, startDate, endDate} = JSON.parse(req.body);
+  let {topic, startDate, endDate} = JSON.parse(req.body);
+  startDate = moment(startDate).format("YYYYMMDD");
+  endDate = moment(endDate).format("YYYYMMDD");
   try {
     console.log("topic is >>>>", req.body, topic, startDate, endDate);
     let response = await
@@ -31,6 +33,7 @@ async function postFavArticle (req, res) {
   try {
     await Article.create(_.omit(articleToSave, '_id'));
     res.status(200).json('new article saved').end();
+    global.io.sockets.in('test').emit('message', {message: 'new Article faved'});
   } catch(err) {
     console.log(`error saving article ${err}`);
     res.status(422).json('error saving article').end();
